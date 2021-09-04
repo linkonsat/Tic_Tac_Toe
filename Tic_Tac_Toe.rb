@@ -1,20 +1,37 @@
-puts "Welcome to Tic Tac Toe! 
-First your going to enter in your letter character that you want to use"
+require 'pry-byebug'
+array = []
+def icon_check(array)
+   # binding.pry
+    puts "Welcome to Tic Tac Toe player #{array.length}!. 
+Enter in your letter character that you want to use"
+    until ("a".."z").include?(variable_icon = gets.chomp) || ("A".."Z").include?(variable_icon = gets.chomp) do
+        puts "You put a invalid character. Enter a single letter character" 
+    end     
 
-class Playerone
-
-    def initialize (choice)
-        @choice = choice
-
-    end
-
-    def valid_name (player_icon)
-        while ("a".."z").include?(player_icon) || ("A".."Z").include?(player_icon) == false do
-            puts "invalid icon! enter a single letter. Upper or lowercase"
-        end
-
+    array.push(Players.new(variable_icon[0]))
+    
 end
 
-player_one = Playerone.new(choice)
 
-puts player_one
+
+class Players
+    attr_accessor :player_icon
+
+    def initialize (player_icon)
+        @player_icon = player_icon
+    end
+
+  
+end
+
+2.times do
+icon_check(array)
+end
+p array
+ #module GameBoard
+ #   gameboard =
+ #   [0,0,0,
+ #    0,0,0,
+  #   0,0,0,
+  #  ]
+#end
