@@ -4,7 +4,7 @@ def icon_check(array)
    # binding.pry
     puts "Welcome to Tic Tac Toe player #{array.length}!. 
 Enter in your letter character that you want to use"
-    until ("a".."z").include?(variable_icon = gets.chomp) || ("A".."Z").include?(variable_icon = gets.chomp) do
+    until ("a".."z").include?(variable_icon = gets.chomp) || ("A".."Z").include?(variable_icon) && variable_icon.length == 1 do
         puts "You put a invalid character. Enter a single letter character" 
     end     
 
@@ -28,10 +28,37 @@ end
 icon_check(array)
 end
 p array
- #module GameBoard
- #   gameboard =
- #   [0,0,0,
- #    0,0,0,
-  #   0,0,0,
-  #  ]
-#end
+ module GameBoard
+    #includes initial gameboard and win checks
+    gameboard =
+    [0,1,2,
+     3,4,5,
+     6,7,8,
+    ]
+    def win_check_columns
+    end
+
+    def win_check_rows
+
+    end
+
+    def win_check_diagonals
+
+    end
+
+    def round
+end
+end
+
+    class Game
+        #creates a updated gameboard that resets the board
+        #once a player wins and also puts a display of the current board
+        include GameBoard
+        def initialize
+        end
+
+        def play_again
+        end
+        def game_state
+        end
+    end
