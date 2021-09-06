@@ -27,14 +27,13 @@ end
 2.times do
 icon_check(array)
 end
-p array
- module GameBoard
+
+ class GameBoard
     #includes initial gameboard and win checks
-    gameboard =
-    [0,1,2,
-     3,4,5,
-     6,7,8,
-    ]
+    attr_accessor :board
+    def initialize(board)
+    @board = board 
+    end
     def win_check_columns
     end
 
@@ -47,18 +46,30 @@ p array
     end
 
     def round
-end
+    end
 end
 
     class Game
         #creates a updated gameboard that resets the board
         #once a player wins and also puts a display of the current board
-        include GameBoard
-        def initialize
+
+
+        def initialize(play)
+        
         end
 
         def play_again
         end
         def game_state
+            #returns a copy of the current board
+        end
+
+        def round
         end
     end
+    
+    board = GameBoard.new([0,1,2,
+        3,4,5,
+        6,7,8,
+       ])
+ 
