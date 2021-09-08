@@ -100,4 +100,4 @@ def game
   rerun(result)
 end
 
-game
+game()
