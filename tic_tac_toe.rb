@@ -12,6 +12,12 @@ module GameRules
                        board.values_at(1, 5, 9), board.values_at(3, 5, 7)]
     return true if board_condition.include?(winning_condition)
   end
+  def tie (board) 
+    
+    if(board.any?(Numeric) == false)
+      return true
+    end
+  end
 end
 
 # creates a player
@@ -77,8 +83,12 @@ def turn(array, board)
   end
 end
 
-def rerun(result)
-  puts "You won player#{result}! enter Y to play again or enter any other character to exit"
+def rerun(result,board)
+  if (board.tie(board.board) == true)
+  puts "It's a tie :(. enter Y to play again or enter any other character to exit"
+  else
+  puts  "You won player #{result}! enter Y to play again or enter any other character to exit"
+  end
 
   if gets.chomp == 'Y'
     game
@@ -90,14 +100,14 @@ end
 
 def game
   array = []
-  board = GameBoard.new([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+  board = GameBoard.new(['a', 1, 2, 3, 4, 5, 6, 7, 8, 9])
   player_generators(array)
 
-  until board.win(board.board, array[0].player_icon) || board.win(board.board, array[1].player_icon)
+  until board.win(board.board, array[0].player_icon) || board.win(board.board, array[1].player_icon) || board.tie(board.board)
     result = board_display(array, board)
     turn(array, board)
   end
-  rerun(result)
+  rerun(result,board)
 end
 
 game()
