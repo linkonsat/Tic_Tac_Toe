@@ -1,24 +1,7 @@
 # frozen_string_literal: true
 
 require 'pry-byebug'
-# This module creates a set of winning boards and returns if the current board matches
-module GameRules
-  def win(board, player_symbol)
-    winning_condition = [player_symbol, player_symbol, player_symbol]
-
-    board_condition = [board.values_at(1, 2, 3), board.values_at(4, 5, 6),
-                       board.values_at(7, 8, 9), board.values_at(1, 4, 7),
-                       board.values_at(2, 5, 8), board.values_at(3, 6, 9),
-                       board.values_at(1, 5, 9), board.values_at(3, 5, 7)]
-    return true if board_condition.include?(winning_condition)
-  end
-  def tie (board) 
-    
-    if(board.any?(Numeric) == false)
-      return true
-    end
-  end
-end
+require './lib/Game_Rules'
 
 # creates a player
 class Players
@@ -47,6 +30,7 @@ def icon_check(array)
   # binding.pry
   puts "Welcome to Tic Tac Toe player #{array.length}!.
 Enter in your letter character that you want to use"
+
   until ('a'..'z').include?(player_icon = gets.chomp) || ('A'..'Z').include?(player_icon) && player_icon.length == 1
     puts 'You put a invalid character. Enter a single letter character'
   end
@@ -71,23 +55,23 @@ def board_display(array, board)
   player
 end
 
-def turn(array, board)
+def turn(players, board)
   until (1..9).include?(board.board[position = gets.chomp.to_i]) && board.board[position].class != String
     puts 'position is not available. Choose a open position on the board'
   end
 
-  if board.board.count(array[1].player_icon) >= board.board.count(array[0].player_icon)
-    board.player_move(array[0].player_icon, position.to_i)
+  if board.board.count(players[1].player_icon) >= board.board.count(players[0].player_icon)
+    board.player_move(players[0].player_icon, position.to_i)
   else
-    board.player_move(array[1].player_icon, position.to_i)
+    board.player_move(players[1].player_icon, position.to_i)
   end
 end
 
-def rerun(result,board)
-  if (board.tie(board.board) == true)
-  puts "It's a tie :(. enter Y to play again or enter any other character to exit"
+def rerun(result, board)
+  if board.tie(board.board) == true
+    puts "It's a tie :(. enter Y to play again or enter any other character to exit"
   else
-  puts  "You won player #{result}! enter Y to play again or enter any other character to exit"
+    puts "You won player #{result}! enter Y to play again or enter any other character to exit"
   end
 
   if gets.chomp == 'Y'
@@ -99,15 +83,15 @@ def rerun(result,board)
 end
 
 def game
-  array = []
+  players = []
   board = GameBoard.new(['a', 1, 2, 3, 4, 5, 6, 7, 8, 9])
-  player_generators(array)
+  player_generators(players)
 
-  until board.win(board.board, array[0].player_icon) || board.win(board.board, array[1].player_icon) || board.tie(board.board)
-    result = board_display(array, board)
-    turn(array, board)
+  until board.win(board.board, players[0].player_icon) || board.win(board.board, players[1].player_icon) || board.tie(board.board)
+    result = board_display(players, board)
+    turn(players, board)
   end
-  rerun(result,board)
+  rerun(result, board)
 end
 
-game()
+game
