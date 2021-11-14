@@ -17,7 +17,8 @@ class GameBoard
     end
     private
         def verify_input
-            until (1..7).include?(@position)
+            position = 0
+            until (1..7).include?(position)
                 position  = gets.chomp.to_i
                 return position
             end
