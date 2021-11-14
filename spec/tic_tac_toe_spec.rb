@@ -1,23 +1,35 @@
-require_relative '../lib/tic_tac_toe'
+require_relative '../lib/gameboard'
 
 describe GameBoard do
-    describe "#player_move" do
-    subject(:board) { described_class.new(['a', 1, 2, 3, 4, 5, 6, 7,])}
-    context "changes board spot to input" do
-        it "changes board position to value" do 
-        player_symbol = "t"
-        position = 2
-        expect(board.board[position]).to eql("t")
-        board.player_move(position, player_symbol)
+    describe "#verify_input" do
+    subject(:board) { described_class.new(['a', 1, 2, 3, 4, 5, 6, 7])}
+    context "returns input on correct input" do
+        before do 
+            allow(board).to receive(:verify_input).and_return(5)
+        end
+        it "assings position a number on correct input" do 
+        board.player_move
+        expect(board.position).to eql(5)
     end
 end
-    context "expect error message on wrong input" do
+    context "expect position to not be assigned to a wrong input" do
+        before do 
+            allow(board).to receive(:verify_input).and_return(10,5)
+        end
+        it "does not assign position until correct input" do
+       board.player_move
+        expect(board.position).to eql(5)     
+    end
+end
+end
+    describe "#change_board" do
+    subject(:board) {described_class.new(["a", 1, 2, 3, 4, 5, 6, 7])}
+    context "changes board position on correct placement" do
+    it "changes board position to correct player symbol" do
+        position = 5
         player_symbol = "t"
-        position = 20
-        error_message = "position is not available. Choose a open position on the board"
-        it "displays error message on wrong input" do
-        expect(board).to receive(:puts).with(error_message)
-        board.player_move(position, player_symbol)
+        board.change_board(position,player_symbol)
+        expect(board.board[position]).to eql("t")
     end
 end
 end

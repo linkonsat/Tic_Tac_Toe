@@ -1,16 +1,28 @@
 class GameBoard
-    attr_accessor :board
-  
-    include GameRules
+    attr_accessor :board, :position
+
     def initialize(board)
-      @board = board
+      @board = board 
+      @position = nil
     end
   
-    def player_move(player_symbol, position)
-      board[position] = player_symbol
+    def player_move
+        until (1..7).include?(@position = verify_input) 
+            puts "position is not available. Choose a open position on the board"
+        end
     end
-  end
-  
+    
+    def change_board(position,player_symbol)    
+        @board[position] = player_symbol
+    end
+    private
+        def verify_input
+            until (1..7).include?(@position)
+                position  = gets.chomp.to_i
+                return position
+            end
+        end
+
   def board_display(player, board)
     puts "It's your turn player  #{player}. Enter a number on the board to place your symbol
        #{board.board[1]} | #{board.board[2]} | #{board.board[3]}
@@ -19,3 +31,5 @@ class GameBoard
       -----------
        #{board.board[7]} | #{board.board[8]} | #{board.board[9]}"
   end
+  end
+
