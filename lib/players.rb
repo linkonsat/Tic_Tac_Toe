@@ -2,9 +2,17 @@
 class Players
     attr_accessor :player_one, :player_two
   
-    def initialize(player_icon)
-      @player_one = verify_player
-      @player_two = verify_player
+    def initialize
+      @player_one = nil
+      @player_two = nil
+    end
+
+    def assign_player_one
+        @player_one = verify_player
+    end
+
+    def assign_player_two
+        @player_two = verify_player
     end
     
       def verify_player
@@ -13,5 +21,7 @@ class Players
           end
           return player_icon
         end  
+
   end
   
+
