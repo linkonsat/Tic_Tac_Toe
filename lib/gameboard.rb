@@ -7,7 +7,7 @@ class GameBoard
     end
   
     def player_move
-        until (1..7).include?(@position = verify_input) 
+        until (1..7).include?(@position = verify_input(position = gets.chomp.to_i)) 
             puts "position is not available. Choose a open position on the board"
         end
     end
@@ -16,10 +16,8 @@ class GameBoard
         @board[position] = player_symbol
     end
     private
-        def verify_input
-            position = 0
-            until (1..7).include?(position)
-                position  = gets.chomp.to_i
+        def verify_input(position)
+            if (1..7).include?(position)
                 return position
             end
         end

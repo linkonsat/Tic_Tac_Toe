@@ -15,6 +15,10 @@ class Players
         @player_two = verify_player
     end
     
+    def random
+        a = gets.chomp
+        return a.to_i
+    end
       def verify_player
         until ('a'..'z').include?(player_icon = gets.chomp) || ('A'..'Z').include?(player_icon) && player_icon.length == 1
             puts 'You put a invalid character. Enter a single letter character'

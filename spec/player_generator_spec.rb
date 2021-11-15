@@ -14,7 +14,7 @@ describe Players do
         end
     end
 
-    context "assings the second player symbol" do
+    context "assigns the second player symbol" do
     before do
         allow(players).to receive(:verify_player).and_return("b")
     end
@@ -23,5 +23,14 @@ describe Players do
             expect(players.player_two).to eql("b")
         end
 end
-end
+    context "tests the random gets method" do
+        before do 
+            allow(players).to receive(:gets).and_return('10')
+        end
+        it "reads the chomp value" do 
+        result = players.random
+        expect(result).to eql(10)
+        end
+    end
+end 
 end

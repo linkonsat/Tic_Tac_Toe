@@ -5,7 +5,7 @@ describe GameBoard do
     subject(:board) { described_class.new(['a', 1, 2, 3, 4, 5, 6, 7])}
     context "returns input on correct input" do
         before do 
-            allow(board).to receive(:verify_input).and_return(5)
+            allow(board).to receive(:gets).and_return("5")
         end
         it "assings position a number on correct input" do 
         board.player_move
@@ -14,7 +14,7 @@ describe GameBoard do
 end
     context "expect position to not be assigned to a wrong input" do
         before do 
-            allow(board).to receive(:verify_input).and_return(10,5)
+            allow(board).to receive(:gets).and_return("10","5")
         end
         it "does not assign position until correct input" do
        board.player_move
@@ -32,5 +32,16 @@ end
         expect(board.board[position]).to eql("t")
     end
 end
+end
+
+    describe "#verify_input" do 
+    subject(:board) {described_class.new(["a", 1, 2, 3, 4, 5, 6, 7])}
+    before do
+        allow(board).to receive(:gets).and_return("5")
+    end
+    it "tests verify input for proper return val" do 
+        result = board.player_move
+        expect(board.position).to eql(5)
+    end
 end
 end

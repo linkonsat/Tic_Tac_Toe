@@ -1,5 +1,5 @@
 # Module compares board values and returns true is board match exists
-module GameRules
+class GameResult
     def win(board, player_symbol)
       winning_condition = [player_symbol, player_symbol, player_symbol]
   
