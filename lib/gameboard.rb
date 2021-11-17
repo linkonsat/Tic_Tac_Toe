@@ -10,6 +10,7 @@ class GameBoard
         until (1..7).include?(@position = verify_input(position = gets.chomp.to_i)) 
             puts "position is not available. Choose a open position on the board"
         end
+        return position
     end
     
     def change_board(position,player_symbol)    
@@ -23,12 +24,12 @@ class GameBoard
         end
 
   def board_display(player, board)
-    puts "It's your turn player  #{player}. Enter a number on the board to place your symbol
-       #{board.board[1]} | #{board.board[2]} | #{board.board[3]}
+    puts "It's your turn player  #{player.player_icon}. Enter a number on the board to place your symbol
+       #{board.board[0]} | #{board.board[1]} | #{board.board[2]}
       -----------
-       #{board.board[4]} | #{board.board[5]} | #{board.board[6]}
+       #{board.board[3]} | #{board.board[4]} | #{board.board[5]}
       -----------
-       #{board.board[7]} | #{board.board[8]} | #{board.board[9]}"
+       #{board.board[6]} | #{board.board[7]} | #{board.board[8]}"
   end
   end
 

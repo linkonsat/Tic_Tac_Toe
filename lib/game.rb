@@ -36,22 +36,29 @@ class Game
     end
 
     def run_game
-      self.create_players
-      self.assign_player_symbols
+      new_game = Game.new
+      new_game.create_players
+      new_game.assign_player_symbols
       win_conditions = GameResult.new
-      current_player = nil
-      until win_conditions.win(board,current_player) || wind_conditions.tie 
+      current_player = player_list[0].player_icon
+      until win_conditions.win(@board,current_player) || wind_conditions.tie(@board)
+        @board.board_display(current_player,@board)
+        position = @board.player_move
+        @board.change_board(position,current_player.player_icon)
+        current_player = new_game.player_turn(@board.board)
+      end
+      new_game.rerun(current_player,@board)
     end
     
-    def rerun(result, board)
+    def rerun(player, board)
       if board.tie(board.board) == true
         puts "It's a tie :(. enter Y to play again or enter any other character to exit"
       else
-        puts "You won player #{result}! enter Y to play again or enter any other character to exit"
+        puts "You won player #{player.icon}! enter Y to play again or enter any other character to exit"
       end
     
       if gets.chomp == 'Y'
-        game
+        run_game
       else
         puts 'Thank you for playing!'
     
