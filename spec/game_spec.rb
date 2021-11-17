@@ -24,8 +24,9 @@ end
         allow(player_one).to receive(:player_icon) { 'a' }
         allow(player_two).to receive(:player_icon) { 'b' }
         game.instance_variable_set(:@player_list, [player_one, player_two])
-        selected_player = game.player_turn(board)
-        expect(selected_player).to eql(0)
+        game.instance_variable_set(:@board, board)
+        selected_player = game.player_turn
+        expect(selected_player).to eql(1)
 
     end
 
@@ -36,34 +37,11 @@ end
         allow(player_one).to receive(:player_icon) { 'a' }
         allow(player_two).to receive(:player_icon) { 'b' }
         game.instance_variable_set(:@player_list, [player_one, player_two])
-        selected_player = game.player_turn(board)
-        expect(selected_player).to eql(1)
+        game.instance_variable_set(:@board,board )
+        selected_player = game.player_turn
+        expect(selected_player).to eql(0)
     end
 end
 end
 
-    describe "#turn_switch" do 
-    subject(:game) {described_class.new}
-    context "switches turns" do 
-        it "switches from player one to player two" do 
-        end
-    end
-
-    context "switches turns" do 
-        it "switches from player two to player one" do 
-        end
-    end
-end
-
-describe "#rerun" do 
-subject(:game) {described_class.new}
-context " runs a new game" do 
-    it "runs a new game" do 
-    end
-end
-context "exits the game" do 
-    it "exits the game on input non Y" do 
-    end
-end
-end
 end

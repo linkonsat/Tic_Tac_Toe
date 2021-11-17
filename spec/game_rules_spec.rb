@@ -24,7 +24,7 @@ describe GameResult do
 
     context "returns false on no winning condition" do 
         it "returns false on no winning conditions" do
-            expect(result.win([0,1,2,3,4,5,6,7,8],"a")).to eql(nil)
+            expect(result.win(["t","t","t","t","t","t","t","t","t"],"a")).to eql(nil)
         end
     end
 end
