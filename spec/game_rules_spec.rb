@@ -16,9 +16,9 @@ describe GameResult do
     subject(:result) { described_class.new() }
     context "returns a win on vertical,diagonal, and cross board of all player symbols" do
         it "returns true on a valid win" do 
-            expect(result.win(["a","a","a","a",4, 5, 6, 7,8,9],"a")).to eql(true)
-            expect(result.win(["a","a",2,3,"a",5,6,"a",8,9],"a")).to eql(true)
-            expect(result.win(["a",1,2,"a",4,"a",6,"a",8,9],"a")).to eql(true)
+            expect(result.win(["a","a","a","a",4, 5, 6, 7,8],"a")).to eql(true)
+            expect(result.win(["a","a",2,3,"a",5,6,"a",8],"a")).to eql(true)
+            expect(result.win(["a",1,2,3,"a",5,6,7,"a"],"a")).to eql(true)
         end
     end
 

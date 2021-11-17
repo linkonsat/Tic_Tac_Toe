@@ -1,7 +1,7 @@
 class GameBoard
     attr_accessor :board, :position
 
-    def initialize(board)
+    def initialize(board = [0,1,2,3,4,5,6,7,8,9])
       @board = board 
       @position = nil
     end
@@ -17,7 +17,7 @@ class GameBoard
     end
     private
         def verify_input(position)
-            if (1..7).include?(position)
+            if (1..9).include?(position)
                 return position
             end
         end

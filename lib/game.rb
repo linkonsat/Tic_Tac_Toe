@@ -1,34 +1,46 @@
+require_relative "./players"
+require_relative "./gameboard"
+require_relative "./game_result"
 class Game
+  attr_accessor :player_list, :board
 
-    def icon_check(array)
-        # binding.pry
-        puts "Welcome to Tic Tac Toe player #{array.length}!.
-      Enter in your letter character that you want to use"
-        array.push(Players.new(player_icon))
+  def initialize
+    @player_list = []
+    @board = GameBoard.new
+  end
+    def create_players
+        2.times do
+        @player_list.push(Players.new)
       end
+    end
 
-      player
+    def assign_player_symbols 
+      i = 0
+      2.times do 
+        puts "Welcome to Tic Tac Toe player #{@player_list.length}!.\n
+        Enter in your letter character that you want to use"
+        @player_list[i].assign_player 
+        i += 1
+      end
     end
     def player_turn(board)
-    player = board.board.count(array[1].player_icon) >= board.board.count(array[0].player_icon) ? 0 : 1
+    return player = board.board.count(@player_list[0].player_icon) >= board.board.count(@player_list[1].player_icon) ? 0 : 1
     end
-    def turn(players, board)
-      position = board_input_verification(players,board)
-      turn_switch(players,board,position)
-    end
-    def board_input_verification(players,board)
-      until (1..9).include?(board.board[position = gets.chomp.to_i]) && board.board[position].class != String
-        puts 'position is not available. Choose a open position on the board'
-      end
-      return position
-    end
-    
+
     def turn_switch(players,board,position)
       if board.board.count(players[1].player_icon) >= board.board.count(players[0].player_icon)
         board.player_move(players[0].player_icon, position.to_i)
       else
         board.player_move(players[1].player_icon, position.to_i)
       end
+    end
+
+    def run_game
+      self.create_players
+      self.assign_player_symbols
+      win_conditions = GameResult.new
+      current_player = nil
+      until win_conditions.win(board,current_player) || wind_conditions.tie 
     end
     
     def rerun(result, board)
