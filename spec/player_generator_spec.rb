@@ -8,28 +8,19 @@ describe Players do
        before do
         allow(players).to receive(:verify_player).and_return("a")
        end
-        it "gives player one the correct symbol" do 
-            players.assign_player_one
-            expect(players.player_one).to eql("a")
+        it "gives player the correct symbol" do 
+            players.assign_player
+            expect(players.player_icon).to eql("a")
         end
     end
 
-    context "assigns the second player symbol" do
-    before do
-        allow(players).to receive(:verify_player).and_return("b")
-    end
-        it "gives player two the correct symbol" do
-            players.assign_player_two
-            expect(players.player_two).to eql("b")
-        end
-end
     context "tests the random gets method" do
         before do 
-            allow(players).to receive(:gets).and_return('10')
+            allow(players).to receive(:gets).and_return('b')
         end
         it "reads the chomp value" do 
-        result = players.random
-        expect(result).to eql(10)
+        result = players.verify_player
+        expect(result).to eql('b')
         end
     end
 end 
